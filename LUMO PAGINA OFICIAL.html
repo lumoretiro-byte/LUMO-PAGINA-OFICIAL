@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumo — Retiro por Desempleo</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F0E8;
+    --warm-dark: #1C1410;
+    --terracotta: #C96B3A;
+    --gold: #D4A853;
+    --brown: #7B4F2E;
+    --light-brown: #E8D5BC;
+    --white: #FDFAF6;
+    --mid: #6B5B4E;
+    --green: #25D366;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--cream);
+    color: var(--warm-dark);
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(247, 240, 232, 0.93);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .nav-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--warm-dark);
+    letter-spacing: -0.5px;
+  }
+
+  .nav-cta {
+    background: var(--warm-dark);
+    color: var(--white);
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .nav-cta:hover { background: var(--terracotta); }
+
+  .hero {
+    min-height: 100vh;
+    padding-top: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--warm-dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-blob1 {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    opacity: 0.12;
+    top: -150px; right: -150px;
+    pointer-events: none;
+  }
+
+  .hero-blob2 {
+    position: absolute;
+    width: 350px; height: 350px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.1;
+    bottom: 0; left: 25%;
+    pointer-events: none;
+  }
+
+  .hero-left {
+    padding: 70px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.5px;
+    margin-bottom: 32px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(212,168,83,0.18);
+    border: 1px solid rgba(212,168,83,0.4);
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    width: fit-content;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 em { color: var(--gold); font-style: italic; }
+
+  .hero-sub {
+    color: rgba(253,250,246,0.6);
+    font-size: 0.97rem;
+    line-height: 1.7;
+    max-width: 380px;
+    margin-bottom: 38px;
+  }
+
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--terracotta);
+    color: white;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    border: none;
+    text-decoration: none;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(201,107,58,0.35);
+    background: #b85e30;
+  }
+
+  .cta-btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--white);
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    border: 2px solid rgba(255,255,255,0.3);
+    text-decoration: none;
+  }
+
+  .cta-btn-outline:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    padding: 70px 40px;
+  }
+
+  .hero-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 38px 34px;
+    max-width: 310px;
+    width: 100%;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+  }
+
+  .hero-card .icon { font-size: 2.4rem; margin-bottom: 14px; }
+
+  .hero-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    color: var(--warm-dark);
+    margin-bottom: 10px;
+  }
+
+  .hero-card p {
+    font-size: 0.86rem;
+    color: var(--mid);
+    line-height: 1.65;
+    margin-bottom: 22px;
+  }
+
+  .pill-list { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .pill {
+    background: var(--cream);
+    color: var(--brown);
+    font-size: 0.77rem;
+    font-weight: 600;
+    padding: 5px 13px;
+    border-radius: 20px;
+    border: 1px solid var(--light-brown);
+  }
+
+  .divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--terracotta), var(--gold), var(--terracotta));
+    opacity: 0.5;
+  }
+
+  .section-wrap { padding: 80px 5%; max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+    color: var(--warm-dark);
+    line-height: 1.2;
+    margin-bottom: 40px;
+  }
+
+  .casos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+  .caso-card {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 28px;
+    border-top: 3px solid var(--gold);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .caso-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+  .caso-card .emoji { font-size: 1.9rem; margin-bottom: 12px; }
+
+  .caso-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1rem;
+    color: var(--warm-dark);
+    margin-bottom: 8px;
+  }
+
+  .caso-card p { font-size: 0.86rem; color: var(--mid); line-height: 1.6; }
+  .caso-card a { color: var(--terracotta); font-weight: 600; text-decoration: none; }
+  .caso-card a:hover { text-decoration: underline; }
+
+  .req-section { background: var(--warm-dark); padding: 80px 5%; }
+  .req-inner { max-width: 1100px; margin: 0 auto; }
+  .req-section .section-label { color: var(--gold); }
+  .req-section .section-title { color: var(--white); }
+
+  .req-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+  }
+
+  .req-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    padding: 30px 26px;
+    text-align: center;
+    transition: background 0.2s;
+  }
+
+  .req-card:hover { background: rgba(255,255,255,0.09); }
+
+  .req-card .num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.6rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .req-card h4 { color: var(--white); font-size: 0.93rem; font-weight: 500; margin-bottom: 8px; }
+  .req-card p { color: rgba(255,255,255,0.5); font-size: 0.81rem; line-height: 1.5; }
+
+  .pasos-section { padding: 80px 5%; max-width: 1100px; margin: 0 auto; }
+
+  .pasos-list { display: flex; flex-direction: column; margin-top: 40px; position: relative; }
+
+  .pasos-list::before {
+    content: '';
+    position: absolute;
+    left: 27px; top: 44px; bottom: 44px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--terracotta), var(--gold));
+    opacity: 0.3;
+  }
+
+  .paso { display: flex; gap: 24px; align-items: flex-start; padding: 18px 0; position: relative; }
+
+  .paso-num {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--warm-dark);
+    color: var(--gold);
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    border: 2px solid rgba(212,168,83,0.3);
+  }
+
+  .paso-content { padding-top: 10px; }
+
+  .paso-content h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    color: var(--warm-dark);
+    margin-bottom: 6px;
+  }
+
+  .paso-content p { font-size: 0.88rem; color: var(--mid); line-height: 1.65; }
+  .paso-content a { color: var(--terracotta); font-weight: 600; text-decoration: none; }
+  .paso-content a:hover { text-decoration: underline; }
+
+  .maximo-box {
+    background: var(--warm-dark);
+    border-radius: 20px;
+    padding: 36px 40px;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .maximo-text p {
+    color: rgba(253,250,246,0.55);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin-top: 6px;
+  }
+
+  .maximo-text strong {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    color: var(--white);
+  }
+
+  .wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--green);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex-shrink: 0;
+  }
+
+  .wa-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+  }
+
+  footer {
+    background: var(--warm-dark);
+    padding: 32px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 0;
+  }
+
+  .footer-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    opacity: 0.7;
+  }
+
+  footer p { color: rgba(253,250,246,0.4); font-size: 0.8rem; }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .casos-grid { grid-template-columns: 1fr; }
+    .req-grid { grid-template-columns: 1fr; }
+    footer { justify-content: center; text-align: center; }
+    .maximo-box { flex-direction: column; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * { animation: fadeUp 0.6s ease both; }
+  .hero-left > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.18s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.32s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.46s; }
+  .hero-left > *:nth-child(5) { animation-delay: 0.58s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Lumo</span>
+  <a href="https://wa.me/3341861881" target="_blank" class="nav-cta">Iniciar trámite →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob1"></div>
+  <div class="hero-blob2"></div>
+  <div class="hero-left">
+    <span class="hero-brand">Lumo</span>
+    <span class="badge">Retiro por desempleo</span>
+    <h1>¿Perdiste tu trabajo? Tienes <em>dinero guardado</em> que puedes retirar</h1>
+    <p class="hero-sub">Si trabajaste con IMSS en cualquier momento de tu vida, acumulaste un ahorro en tu AFORE. Ese dinero es tuyo y puedes pedirlo.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/3341861881" target="_blank" class="cta-btn">Iniciar trámite →</a>
+      <button class="cta-btn-outline" onclick="document.getElementById('pasos').scrollIntoView({behavior:'smooth'})">Pasos para mi retiro</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="icon">💰</div>
+      <h3>¿Qué es el retiro por desempleo?</h3>
+      <p>Es un trámite que te permite retirar una parte de tu ahorro del AFORE cuando te quedas sin empleo o cuando tu patrón no te da de alta en el Seguro Social.</p>
+      <div class="pill-list">
+        <span class="pill">✅ Es tu dinero</span>
+        <span class="pill">✅ 100% legal</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ¿Para quién? -->
+<div class="section-wrap">
+  <p class="section-label">¿Aplica para mí?</p>
+  <h2 class="section-title">Puedes solicitarlo si estás en alguna de estas situaciones</h2>
+  <div class="casos-grid">
+    <div class="caso-card">
+      <div class="emoji">📋</div>
+      <h4>Perdiste tu trabajo</h4>
+      <p>Si tu empresa te dio de baja del IMSS y ya no cuentas con seguro social activo, tienes derecho a hacer este retiro.</p>
+    </div>
+    <div class="caso-card">
+      <div class="emoji">🏗️</div>
+      <h4>Trabajas pero sin IMSS</h4>
+      <p>Si actualmente trabajas pero tu patrón no te da de alta en el Seguro Social, también puedes solicitar el retiro.</p>
+    </div>
+    <div class="caso-card">
+      <div class="emoji">👴</div>
+      <h4>Llevas años cotizando</h4>
+      <p>Mientras más años hayas trabajado con IMSS, más dinero habrás acumulado. Puedes consultar tu saldo en <a href="https://www.aforeweb.com.mx" target="_blank">AforeWeb</a>.</p>
+    </div>
+    <div class="caso-card">
+      <div class="emoji">❓</div>
+      <h4>No sé si tengo AFORE</h4>
+      <p>Si en algún momento de tu vida trabajaste con prestaciones de ley, lo más probable es que sí tengas dinero acumulado. <a href="https://www.aforeweb.com.mx/localiza-tu-afore" target="_blank">Localiza tu AFORE aquí</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Requisitos -->
+<div class="req-section">
+  <div class="req-inner">
+    <p class="section-label">Requisitos</p>
+    <h2 class="section-title">¿Qué necesitas para que te aprueben el retiro?</h2>
+    <div class="req-grid">
+      <div class="req-card">
+        <div class="num">104</div>
+        <h4>Semanas cotizadas mínimas</h4>
+        <p>Debes tener al menos 104 semanas cotizadas al IMSS a lo largo de tu historial laboral.</p>
+      </div>
+      <div class="req-card">
+        <div class="num">46</div>
+        <h4>Días sin empleo formal</h4>
+        <p>Debes haber estado sin IMSS activo por al menos 46 días continuos antes de solicitar el retiro.</p>
+      </div>
+      <div class="req-card">
+        <div class="num">5</div>
+        <h4>Años entre cada retiro</h4>
+        <p>Solo puedes hacer este tipo de retiro una vez cada 5 años.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pasos -->
+<div class="pasos-section" id="pasos">
+  <p class="section-label">Cómo hacerlo</p>
+  <h2 class="section-title">Paso a paso para hacer mi retiro por mi cuenta</h2>
+  <div class="pasos-list">
+
+    <div class="paso">
+      <div class="paso-num">1</div>
+      <div class="paso-content">
+        <h4>Revisa que estés dado de baja en el Seguro Social</h4>
+        <p>Verifica que hayas cumplido 46 días sin una alta en tu reporte de semanas cotizadas. Puedes revisarlo en <a href="https://serviciosdigitales.imss.gob.mx/gestionAsegurados-web-externo/asegurado" target="_blank">Semanas Cotizadas — SISEC</a>.</p>
+      </div>
+    </div>
+
+    <div class="paso">
+      <div class="paso-num">2</div>
+      <div class="paso-content">
+        <h4>Averigua en qué AFORE está tu dinero</h4>
+        <p>Entra a <a href="https://www.aforeweb.com.mx/localiza-tu-afore" target="_blank">AFORE Móvil</a> y búscalo con tu CURP. Es gratis y tarda menos de 5 minutos. Si nunca has escogido una AFORE, seguramente te asignaron una automáticamente.</p>
+      </div>
+    </div>
+
+    <div class="paso">
+      <div class="paso-num">3</div>
+      <div class="paso-content">
+        <h4>Reúne tus documentos</h4>
+        <p>Necesitarás tu INE o pasaporte vigente, tu CURP y el estado de cuenta de tu banco. <strong>La cuenta bancaria debe estar a nombre del propietario de la cuenta de AFORE — no puede solicitarlo otra persona, solo el titular.</strong></p>
+      </div>
+    </div>
+
+    <div class="paso">
+      <div class="paso-num">4</div>
+      <div class="paso-content">
+        <h4>Solicita tu retiro desde AforeWeb</h4>
+        <p>Entra a <a href="https://www.aforeweb.com.mx" target="_blank">AforeWeb</a> y sigue el proceso en línea. No necesitas ir a ninguna oficina, puedes hacerlo desde tu celular o computadora.</p>
+      </div>
+    </div>
+
+    <div class="paso">
+      <div class="paso-num">5</div>
+      <div class="paso-content">
+        <h4>Indica que quieres un retiro por desempleo</h4>
+        <p>Selecciona la opción de "retiro por desempleo". El sistema revisará tu historial y te dirá cuánto dinero puedes retirar.</p>
+      </div>
+    </div>
+
+    <div class="paso">
+      <div class="paso-num">6</div>
+      <div class="paso-content">
+        <h4>Recibe tu dinero</h4>
+        <p>Una vez aprobado, el depósito llega directamente a tu cuenta bancaria en unos días hábiles.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CTA máximo retiro -->
+  <div class="maximo-box">
+    <div class="maximo-text">
+      <strong>¿Quieres retirar el máximo permitido por la CONSAR?</strong>
+      <p>(Hacerlo por tu cuenta representa retirar un monto menor. Si te interesa retirar el máximo permitido por la CONSAR, contáctanos.)</p>
+    </div>
+    <a href="https://wa.me/3341861881" target="_blank" class="wa-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.523 5.847L.057 23.882a.5.5 0 0 0 .613.613l6.035-1.466A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.68-.52-5.2-1.427l-.372-.22-3.853.936.953-3.854-.242-.385A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Contáctanos por WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <span class="footer-logo">Lumo</span>
+  <p>Para hacer tu trámite visita <a href="https://www.aforeweb.com.mx/localiza-tu-afore" target="_blank">aforeweb.com.mx</a></p>
+</footer>
+
+</body>
+</html>
