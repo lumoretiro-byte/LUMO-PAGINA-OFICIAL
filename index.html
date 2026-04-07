@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumo — Retiro por Desempleo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #F7F0E8;
+  --warm-dark: #1C1410;
+  --terracotta: #C96B3A;
+  --gold: #D4A853;
+  --brown: #7B4F2E;
+  --light-brown: #E8D5BC;
+  --white: #FDFAF6;
+  --mid: #6B5B4E;
+  --green: #25D366;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--cream);
+  color: var(--warm-dark);
+}
+
+/* NAV FIX */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(247,240,232,1); /* FIX */
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.nav-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.nav-cta {
+  background: var(--warm-dark);
+  color: white;
+  padding: 10px 22px;
+  border-radius: 50px;
+  text-decoration: none;
+}
+
+/* HERO FIX */
+.hero {
+  min-height: 100vh;
+  padding-top: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--warm-dark);
+}
+
+.hero-left {
+  padding: 70px 50px;
+  color: white;
+}
+
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.hero-sub {
+  opacity: 0.7;
+  margin-bottom: 30px;
+}
+
+.cta-btn {
+  background: var(--terracotta);
+  color: white;
+  padding: 14px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* SECCIONES */
+.section {
+  padding: 80px 5%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <span class="nav-logo">Lumo</span>
+  <a href="https://wa.me/3341861881" target="_blank">Iniciar trámite</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <h1>¿Perdiste tu trabajo? Tienes dinero que puedes retirar</h1>
+    <p class="hero-sub">
+      Si trabajaste con IMSS, tienes ahorro en tu AFORE.
+    </p>
+    <a href="https://wa.me/3341861881" target="_blank" class="cta-btn">
+      Iniciar trámite
+    </a>
+  </div>
+</section>
+
+<div class="section">
+  <h2>¿Aplica para ti?</h2>
+
+  <div class="card">Perdiste tu empleo</div>
+  <div class="card">Trabajas sin IMSS</div>
+  <div class="card">Tienes semanas cotizadas</div>
+</div>
+
+<div class="section">
+  <h2>Requisitos</h2>
+
+  <div class="card">104 semanas cotizadas</div>
+  <div class="card">46 días sin empleo</div>
+  <div class="card">No haber retirado en 5 años</div>
+</div>
+
+<footer class="section">
+  <p>Lumo — Retiro por desempleo</p>
+</footer>
+
+</body>
+</html>
